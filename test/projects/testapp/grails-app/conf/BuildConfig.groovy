@@ -21,7 +21,7 @@ grails.project.fork = [
     console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
 ]
 
-grails.plugin.location.'groovy-extensions' = '../../..'
+grails.plugin.location.'ncareol-extensions' = '../../..'
 
 grails.project.dependency.resolver = 'ivy'
 grails.project.dependency.resolution = {
@@ -55,7 +55,7 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        //compile 'net.sinequanon.jja:grails-groovy-extensions:0.1'
+        //compile 'edu.ucar.eol:grails-ncareol-extensions:0.1'
 
         // plugins for the build system only
         build ":tomcat:7.0.50.1"
