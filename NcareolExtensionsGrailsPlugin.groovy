@@ -4,14 +4,14 @@
  */
 
 /**
- * Grails plugin to include my Groovy extension module
+ * Grails plugin to include common Groovy and Grails extension module
  *
  * @author jja@ucar.edu
  * @see String
  */
 class NcareolExtensionsGrailsPlugin {
     // the plugin version
-    def version = '1.0.0'
+    def version = '1.1.0'
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = '2.3 > *'
     // resources that are excluded from plugin packaging
@@ -25,7 +25,7 @@ class NcareolExtensionsGrailsPlugin {
     def author = 'John Allison'
     def authorEmail = 'jja@ucar.edu'
     def description = '''\
-Include and load some Groovy extension modules.
+Include and load some Groovy extension modules and common Grails taglibs.
 '''
 
     // URL to the plugin's documentation
