@@ -2,6 +2,10 @@ grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 
+grails.project.repos.internalMaven.url = 'file:////net/www_dev/data/html/maven2'
+grails.project.repos.default = 'internalMaven'
+grails.release.scm.enabled = false
+
 grails.project.fork = [
     // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
     //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
@@ -18,6 +22,8 @@ grails.project.fork = [
 
 grails.project.dependency.resolver = 'ivy'
 grails.project.dependency.resolution = {
+    cacheDir 'target/ivy-cache'
+
     // inherit Grails' default dependencies
     inherits("global") {
         // uncomment to disable ehcache
@@ -25,12 +31,7 @@ grails.project.dependency.resolution = {
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
-
-        // local dir of jar file
-        // TODO: point to future release of Groovy extension module
-        //   or maybe one day we can point to a git url
-        //   https://github.com/jja/groovy-jja-extensions
-        flatDir name: 'localJars', dirs: '/h/eol/jja/jars'
+        mavenRepo grails.project.repos.internalMaven.url
 
         grailsCentral()
         mavenLocal()
@@ -44,13 +45,12 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-        // runtime 'mysql:mysql-connector-java:5.1.27'
-        compile 'edu.ucar.eol:groovy-ncareol-extensions:1.1.0'
+        compile 'edu.ucar.eol:groovy-ncareol-extensions:1.2.0'
     }
 
     plugins {
-        build(":release:3.0.1",
-              ":rest-client-builder:1.0.3") {
+        build(":release:3.1.2",
+              ":rest-client-builder:2.1.1") {
             export = false
         }
     }
