@@ -45,7 +45,7 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-        compile 'edu.ucar.eol:groovy-ncareol-extensions:1.2.0'
+        compile 'edu.ucar.eol:groovy-ncareol-extensions:1.3.0'
     }
 
     plugins {
