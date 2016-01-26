@@ -2,7 +2,7 @@
 
 Grails plugin to include and load common Groovy and Grails extensions
 
-Includes additional methods for String via `groovy-ncareol-extensions`
+Includes additional methods for String and Date via `groovy-ncareol-extensions`
 and the Grails tag `g:logMsg`.
 
 ## Grails fixes
@@ -29,6 +29,11 @@ So symlink that name:
 
     cd $GRAILS_HOME/lib/org.springframework/springloaded/jars
     ln -s springloaded-1.2.2.RELEASE.jar springloaded-1.2.0.RELEASE.jar
+
+## Development
+
+Hint: to deploy a new version to our internal Maven remote repository,
+use "grails maven-deploy" (via the release plugin).
 
 ## License
 
