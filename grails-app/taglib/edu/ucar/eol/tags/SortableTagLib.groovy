@@ -32,7 +32,7 @@
  * limitations under the License.
  */
 
-package edu.ucar.eol.grails
+package edu.ucar.eol.tags
 
 import grails.artefact.Artefact
 
@@ -45,7 +45,7 @@ import grails.artefact.Artefact
 @Artefact("TagLibrary")
 class SortableTagLib {
 
-    static namespace = 'zinc'
+    static namespace = 'eol'
 
     /**
      * Renders a sortable column to support sorting in list views.<br/>
