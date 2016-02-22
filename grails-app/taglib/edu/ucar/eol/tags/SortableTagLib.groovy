@@ -102,6 +102,7 @@ class SortableTagLib {
         // add sorting property and params to link params
         def paramsAttr = attrs.remove("params")
         if (paramsAttr) linkParams.putAll(paramsAttr)
+        linkParams.remove('offset')
         linkParams.sort = property
 
         def total = attrs.int('total',0)
@@ -122,7 +123,6 @@ class SortableTagLib {
             // we can set offset to the currently bottom row
             // except at offset 0, when we flip the complete list
             def offset = params.int('offset',0)
-            params.remove('offset')
             if (total && offset) {
                 offset = total - offset - params.int('max',0)
                 linkParams.offset = (offset > 0) ? offset : 0
