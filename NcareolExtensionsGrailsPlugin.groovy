@@ -13,7 +13,7 @@ class NcareolExtensionsGrailsPlugin {
     def groupId = 'edu.ucar.eol'
 
     // the plugin version
-    def version = '1.6.3'
+    def version = '1.7.0'
 
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = '2.3 > *'
@@ -95,6 +95,37 @@ Include and load some Groovy extension modules and common Grails taglibs.
       map.each { org.codehaus.groovy.reflection.CachedClass cls, List<MetaMethod> methods ->
         cls.addNewMopMethods(methods)
       }
+
+      /**
+       * helper method to obtain a BigDecimal from parameters
+       *
+       * optional second argument is default value and can be a BigDecimal, String,
+       * int, long, float, or double
+       */
+      org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap.metaClass.bigDecimal << {
+        String name, Object defaultValue ->
+        BigDecimal bd = null
+
+        def val = delegate.get(name)
+        if (val) {
+          if (val instanceof BigDecimal)
+            bd = (BigDecimal)val
+          else try {
+            bd = new BigDecimal(val)
+            } catch (e) { }
+          }
+
+        if (null == bd && null != defaultValue) {
+          if (defaultValue instanceof BigDecimal)
+            bd = (BigDecimal)defaultValue
+          else try {
+            bd = new BigDecimal(defaultValue)
+            } catch (e) { }
+          }
+
+        return bd
+      }
+
 
     }
 
