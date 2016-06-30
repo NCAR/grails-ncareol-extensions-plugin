@@ -65,6 +65,7 @@ class PaginateTagLib {
      * @attr controller the name of the controller to use in the link, if not specified the current controller will be linked
      * @attr id The id to use in the link
      * @attr params A map containing request parameters
+     * @attr keepSet Keep params.Set (default is to remove this eol:maxSetter submit button)
      * @attr prev The text to display for the previous link (defaults to "Previous" as defined by default.paginate.prev property in I18n messages.properties)
      * @attr next The text to display for the next link (defaults to "Next" as defined by default.paginate.next property in I18n messages.properties)
      * @attr omitPrev Whether to not show the previous link (if set to true, the previous link will not be shown)
@@ -101,6 +102,9 @@ class PaginateTagLib {
         linkParams.max = max
         if (params.sort) linkParams.sort = params.sort
         if (params.order) linkParams.order = params.order
+
+        if (!attrs.boolean('keepSet',false)) linkParams.remove('Set')
+        attrs.remove('keepSet')
 
         def linkTagAttrs = [:]
         def action

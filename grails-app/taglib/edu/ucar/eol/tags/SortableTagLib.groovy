@@ -70,6 +70,7 @@ class SortableTagLib {
      * @attr titleKey title key to use for the column, resolved against the message source
      * @attr action the name of the action to use in the link, if not specified the list action will be linked
      * @attr params A map containing extra URL query parameters
+     * @attr keepSet Keep params.Set (default is to remove this eol:maxSetter submit button)
      * @attr total total number of results, if present then it's used to calculate the new offset when changing the order of the current column
      * @attr class CSS class name
      */
@@ -102,6 +103,10 @@ class SortableTagLib {
         // add sorting property and params to link params
         def paramsAttr = attrs.remove("params")
         if (paramsAttr) linkParams.putAll(paramsAttr)
+
+        if (!attrs.boolean('keepSet',false)) linkParams.remove('Set')
+        attrs.remove('keepSet')
+
         linkParams.remove('offset')
         linkParams.sort = property
 
