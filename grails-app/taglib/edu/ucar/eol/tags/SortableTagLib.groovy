@@ -154,7 +154,9 @@ class SortableTagLib {
             writer << "${k}=\"${v?.encodeAsHTML()}\" "
         }
         writer << '>'
-        def linkAttrs = [params: linkParams]
+        def linkAttrs = [params: linkParams,
+            rel:'nofollow' // tell bots to not sort the tables
+            ]
         if (mapping) {
             linkAttrs.mapping = mapping
         }
