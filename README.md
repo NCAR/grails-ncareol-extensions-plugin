@@ -34,7 +34,7 @@ So symlink that name:
 ## Development
 
 Hint: to deploy a new version to our internal Maven remote repository,
-use "grails maven-deploy" (via the release plugin).
+use "umask 2; grails maven-deploy" (via the release plugin).
 
 ## License
 
