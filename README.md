@@ -2,9 +2,9 @@
 
 Grails plugin to include and load common Groovy and Grails extensions
 
-Includes additional methods for String and DAte via groovy-jja-extensions,
+Includes additional methods for String and Date via groovy-ncareol-extensions,
 the Grails tag g:logMsg, fixed and extended sortableColumn and paginate tags,
-plus some other Groovy & Grails utility/extension classes.
+plus some other Groovy & Grails utility/extension/testing classes.
 
 ## Grails fixes
 
