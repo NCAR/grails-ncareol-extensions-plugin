@@ -17,7 +17,9 @@ import org.codehaus.groovy.grails.commons.GrailsClass
  * (note the "x" in or not in the classnames)
  *
  * If you implement setUp(), then call "super.setUp()".
- * There, or wherever you instantiate your target, assign its grailsApplication and/or config:
+ * A new grailsApplication (and config) are created for each test in setUp().
+ * There, or wherever you instantiate your target, assign this grailsApplication
+ * and/or config to the target's like properties:
  *     myService = new myService()
  *     myService.grailsApplication = grailsApplication
  *
@@ -33,6 +35,18 @@ class GrailsxUnitTestCase extends GrailsUnitTestCase {
 
     void setUp() {
         super.setUp()
+
+        // always create new mock objects for each test
+        config = null   // lazy creation
+        grailsApplication = createMockGrailsApplication()
+    }
+
+    void tearDown() {
+        // explicitly forget the old stuff
+        config = null
+        grailsApplication = null
+
+        super.tearDown()
     }
 
     /**

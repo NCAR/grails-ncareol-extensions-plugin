@@ -10,6 +10,10 @@ class GrailsxUnitTestCaseTests extends GroovyTestCase {
         def testCase = new TestUnitTestCase()
 
         testCase.setUp()
+        testCase.testConfigClean()
+        testCase.tearDown()
+
+        testCase.setUp()
         testCase.testEmptyGetConfig()
         testCase.tearDown()
 
@@ -35,6 +39,18 @@ class GrailsxUnitTestCaseTests extends GroovyTestCase {
 
         testCase.setUp()
         testCase.testConfigAssign()
+        testCase.tearDown()
+
+        testCase.setUp()
+        testCase.testSetConfigFoo()
+        testCase.tearDown()
+
+        testCase.setUp()
+        testCase.testSetGAConfigBar()
+        testCase.tearDown()
+
+        testCase.setUp()
+        testCase.testConfigClean()
         testCase.tearDown()
     }
 
@@ -91,12 +107,23 @@ class TestUnitTestCase extends GrailsxUnitTestCase {
         grailsApplication.config."$key" = val
         assertEquals val, config."$key"
         assertEquals grailsApplication.config."$key", config."$key"
+    }
 
+    void testSetConfigFoo() {
         config.foo = 42
         assertEquals grailsApplication.config.foo, config.foo
+        assertEquals 42, grailsApplication.config.foo
+    }
 
+    void testSetGAConfigBar() {
         grailsApplication.config.bar = 54
         assertEquals grailsApplication.config.bar, config.bar
+        assertEquals 54, config.bar
+    }
+
+    void testConfigClean() {
+        assert !config.foo  // [:] and not 42 leftover from another test
+        assert !config.bar  // [:] and not 54 leftover from another test
     }
 
 }
