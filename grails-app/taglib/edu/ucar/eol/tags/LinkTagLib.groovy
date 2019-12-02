@@ -43,7 +43,8 @@ import org.codehaus.groovy.grails.web.mapping.LinkGenerator
 
 
 /**
- * Link tags.
+ * Link tags, copied from Grails source,
+ * with new 'eol:rawlink' tag.
  *
  * @author Graeme Rocher
  * @author John Allison
@@ -51,6 +52,9 @@ import org.codehaus.groovy.grails.web.mapping.LinkGenerator
 @Artefact("TagLibrary")
 class LinkTagLib {
 
+    /**
+     * Tags are on the 'eol' namespace.
+     */
     static namespace = 'eol'
 
     @Autowired
@@ -65,9 +69,10 @@ class LinkTagLib {
      * java.net.URLEncoder via the grails UrlCreator via the grails LinkGenerator.
      *
      * Examples:<br/>
-     *
+     * <code><pre>
      * &lt;g:rawlink action="myaction"&gt;link 1&lt;/gr:link&gt;<br/>
      * &lt;g:rawlink controller="myctrl" action="myaction"&gt;link 2&lt;/gr:link&gt;<br/>
+     * </pre></code>
      *
      * @attr controller The name of the controller to use in the link, if not specified the current controller will be linked
      * @attr action The name of the action to use in the link, if not specified the default action will be linked

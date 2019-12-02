@@ -45,6 +45,12 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
+
+        // workaround for broken "grails doc": the jar is now in /lib/
+        // supposedly was fixed in 2.3.1 but is not
+        // https://grails.atlassian.net/browse/GRAILS-10508
+        compile 'grails-docs:grails-docs:2.3.11'
+
         compile 'edu.ucar.eol:groovy-ncareol-extensions:1.5.0'
     }
 
