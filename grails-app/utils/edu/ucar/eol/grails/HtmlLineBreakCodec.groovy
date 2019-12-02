@@ -1,7 +1,7 @@
 package edu.ucar.eol.grails
 
 /**
- * like HTMLCodec but then add <BR> for line breaks (CR, CR LF, or LF)
+ * like HTMLCodec but then add a BR tag for line breaks (CR, CR LF, or LF)
  */
 class HtmlLineBreakCodec {
 

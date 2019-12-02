@@ -40,7 +40,8 @@ import org.codehaus.groovy.grails.web.mapping.UrlMapping
 import org.springframework.web.servlet.support.RequestContextUtils as RCU
 
 /**
- * Tags to help rendering of views and layouts.
+ * Tags to help rendering of pagination links.
+ * Copied from Grails source, with custom fixes and updates.
  *
  * @author Graeme Rocher
  * @author John Allison
@@ -48,6 +49,9 @@ import org.springframework.web.servlet.support.RequestContextUtils as RCU
 @Artefact("TagLibrary")
 class PaginateTagLib {
 
+    /**
+     * Tags are on the 'eol' namespace.
+     */
     static namespace = 'eol'
 
     /**

@@ -37,7 +37,8 @@ package edu.ucar.eol.tags
 import grails.artefact.Artefact
 
 /**
- * Tags to help rendering of views and layouts.
+ * Tags to help rendering of sortable column links.
+ * Copied from Grails source, with custom fixes and updates.
  *
  * @author Graeme Rocher
  * @author John Allison
@@ -45,6 +46,9 @@ import grails.artefact.Artefact
 @Artefact("TagLibrary")
 class SortableTagLib {
 
+    /**
+     * Tags are on the 'eol' namespace.
+     */
     static namespace = 'eol'
 
     /**
@@ -55,12 +59,13 @@ class SortableTagLib {
      * not be resolved, the title will be used as title caption.<br/>
      *
      * Examples:<br/>
-     *
+     * <code><pre>
      * &lt;g:sortableColumn property="title" title="Title" /&gt;<br/>
      * &lt;g:sortableColumn property="title" title="Title" style="width: 200px" /&gt;<br/>
      * &lt;g:sortableColumn property="title" titleKey="book.title" /&gt;<br/>
      * &lt;g:sortableColumn property="releaseDate" defaultOrder="desc" title="Release Date" /&gt;<br/>
      * &lt;g:sortableColumn property="releaseDate" defaultOrder="desc" title="Release Date" titleKey="book.releaseDate" /&gt;<br/>
+     * </pre></code>
      *
      * @emptyTag
      *

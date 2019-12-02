@@ -13,7 +13,7 @@ class NcareolExtensionsGrailsPlugin {
     def groupId = 'edu.ucar.eol'
 
     // the plugin version
-    def version = '1.13.1'
+    def version = '1.14.0'
 
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = '2.3 > *'
@@ -21,6 +21,7 @@ class NcareolExtensionsGrailsPlugin {
     // resources that are excluded from plugin packaging
     def pluginExcludes = [
         'grails-app/views/error.gsp',
+        'lib/',
         'web-app/**',
     ]
 
