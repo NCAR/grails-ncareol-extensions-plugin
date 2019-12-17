@@ -13,7 +13,8 @@ class NcareolExtensionsGrailsPlugin {
     def groupId = 'edu.ucar.eol'
 
     // the plugin version
-    def version = '1.15.0'
+    // 1.15.1 was skipped (not officially released)
+    def version = '1.15.2'
 
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = '2.3 > *'

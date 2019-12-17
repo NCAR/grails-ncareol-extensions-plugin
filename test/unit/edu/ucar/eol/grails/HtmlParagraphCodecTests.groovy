@@ -5,22 +5,31 @@ import grails.test.*
 
 class HtmlParagraphCodecTests extends GrailsUnitTestCase {
 
-    void testEncode() {
+    void testHtmlEncode() {
         loadCodec HTMLCodec     // used by HtmlParagraphCodec
         loadCodec HtmlParagraphCodec
 
-        assertEquals ( "foobar".encodeAsHtmlParagraph() , 'foobar' )
-        assertEquals ( "foo<P>bar".encodeAsHtmlParagraph() , 'foo&lt;P&gt;bar' )
+        assertEquals 'foobar', "foobar".encodeAsHtmlParagraph()
+        assertEquals 'foo&lt;P&gt;bar', "foo<P>bar".encodeAsHtmlParagraph()
+    }
 
-        assertEquals ( "foo\nbar".encodeAsHtmlParagraph() , "foo\nbar" )
-        assertEquals ( "foo\r\nbar".encodeAsHtmlParagraph() , "foo\nbar" )
+    void testBrEncode() {
+        loadCodec HTMLCodec     // used by HtmlParagraphCodec
+        loadCodec HtmlParagraphCodec
 
-        assertEquals ( "foo\r\n\nbar".encodeAsHtmlParagraph() , 'foo\n<P class="para-break"></P>\nbar' )
-        assertEquals ( "foo\r\rbar".encodeAsHtmlParagraph() , 'foo\n<P class="para-break"></P>\nbar' )
-        assertEquals ( "foo\n\rbar".encodeAsHtmlParagraph() , 'foo\n<P class="para-break"></P>\nbar' )
+        assertEquals 'foo<BR>bar', "foo\nbar".encodeAsHtmlParagraph()
+        assertEquals 'foo<BR>bar', "foo\r\nbar".encodeAsHtmlParagraph()
+        //assertEquals 'foo<BR>\nbar', "foo\r\n\n\rbar".encodeAsHtmlParagraph()
+    }
 
-        //assertEquals ( "foo\r\n\n\rbar".encodeAsHtmlParagraph() , "foo<BR>\nbar" )
+    void testParagraphEncode() {
+        //loadCodec HTMLCodec     // used by HtmlParagraphCodec
+        loadCodec HtmlParagraphCodec
 
+        def expected = 'foo\n<P class="para-break"></P>\nbar'
+        assertEquals expected, "foo\r\n\nbar".encodeAsHtmlParagraph()
+        assertEquals expected, "foo\r\rbar".encodeAsHtmlParagraph()
+        assertEquals expected, "foo\n\rbar".encodeAsHtmlParagraph()
     }
 
     void testDecodeSimple() {
@@ -50,10 +59,11 @@ class HtmlParagraphCodecTests extends GrailsUnitTestCase {
     void testDecodeBareP() {
         loadCodec HTMLCodec     // used by HtmlParagraphCodec
         loadCodec HtmlParagraphCodec
-        assertEquals ( 'foo<p></p>bar'.decodeHtmlParagraph() , "foo\n\nbar" )
-        assertEquals ( 'foo<P></P>bar'.decodeHtmlParagraph() , "foo\n\nbar" )
-        assertEquals ( 'foo<P></p>bar'.decodeHtmlParagraph() , "foo\n\nbar" )
-        assertEquals ( 'foo<p></P>bar'.decodeHtmlParagraph() , "foo\n\nbar" )
+        def expected =  "foo\n\nbar"
+        assertEquals expected, 'foo<p></p>bar'.decodeHtmlParagraph()
+        assertEquals expected, 'foo<P></P>bar'.decodeHtmlParagraph()
+        assertEquals expected, 'foo<P></p>bar'.decodeHtmlParagraph()
+        assertEquals expected, 'foo<p></P>bar'.decodeHtmlParagraph()
     }
 
     void testDecodeExpectedP() {
