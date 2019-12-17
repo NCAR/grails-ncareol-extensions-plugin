@@ -1,18 +1,18 @@
 package edu.ucar.eol.grails
 
 /**
- * like HTMLCodec but then use paragraph tags for double newlines
+ * like HTMLCodec but then use break tags for single newlines and paragraph tags for double newlines
  */
 class HtmlParagraphCodec {
 
     /**
-     * encode DOS & double-newlines to <BR>, with HTML encoding
+     * encode quad-newlines to <p>, double-newlines to <BR>, with HTML encoding and DOS-conversion
      */
     static encode = { str ->
-        // DOS & double-newlines to br:
-        str.encodeAsHTML().replace("\r\n","\n").replace("\r","\n").replace("\n\n",'\n<P class="para-break"></P>\n')
+        // DOS & double-newlines to P:
+        str.encodeAsHTML().replaceAll("\r\n","\n").replaceAll("\r","\n").replaceAll("\n",'<BR>').replaceAll("<BR><BR>",'\n<P class="para-break"></P>\n')
 
-        // double-newlines to br:
+        // double-newlines to P:
         //str.encodeAsHTML().normalize().replace("\n\n",'<P>')
     }
 
