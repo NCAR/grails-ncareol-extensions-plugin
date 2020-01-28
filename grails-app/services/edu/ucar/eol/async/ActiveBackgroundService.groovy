@@ -177,8 +177,9 @@ class ActiveBackgroundService {
      * Unlock the shared lock that prevents multiple background processes from running concurrently.
      * Usually not needed, unless an odd exception occurred.
      */
-    void unlock() {
+    boolean unlock() {
         lock.set(false)
+        lock.get()
     }
 
     /**
