@@ -1,7 +1,9 @@
 /*
- * Copyright 2014 University Corporation for Atmospheric Research
+ * Copyright 2014-2020 University Corporation for Atmospheric Research
  * See LICENSE.txt
  */
+
+import edu.ucar.eol.grails.plugins.NcareolExtensionsUtil
 
 /**
  * Grails plugin to include common Groovy and Grails extension module
@@ -13,7 +15,7 @@ class NcareolExtensionsGrailsPlugin {
     def groupId = 'edu.ucar.eol'
 
     // the plugin version
-    def version = '1.15.3'
+    def version = '1.16.0'
 
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = '2.3 > *'
@@ -62,72 +64,10 @@ Include and load some Groovy extension modules and common Grails taglibs.
         // TODO Implement runtime spring config (optional)
     }
 
+    // register dynamic methods to classes
     def doWithDynamicMethods = { ctx ->
-        // TODO Implement registering dynamic methods to classes (optional)
-
-      // kludge to get Groovy extension modules loaded in Grails
-      // http://grails.1312388.n4.nabble.com/groovy-extension-module-and-grails-td4642249.html
-      // http://jira.grails.org/browse/GRAILS-10652
-      // http://stackoverflow.com/questions/19564902/applying-groovy-extensions-in-grails-produces-missingmethodexception-for-string
-      Map<org.codehaus.groovy.reflection.CachedClass, List<MetaMethod>> map = [:]
-      ClassLoader classLoader = Thread.currentThread().contextClassLoader
-      try {
-        Enumeration<URL> resources = classLoader.getResources(org.codehaus.groovy.runtime.m12n.ExtensionModuleScanner.MODULE_META_INF_FILE)
-        for (URL url in resources) {
-          if (url.path.contains('groovy-all')) {
-            // already registered
-            continue
-          }
-          Properties properties = new Properties()
-          InputStream inStream
-          try {
-            inStream = url.openStream()
-            properties.load(inStream)
-            GroovySystem.metaClassRegistry.registerExtensionModuleFromProperties(properties,
-                              classLoader, map)
-          }
-          catch (IOException e) {
-            throw new GroovyRuntimeException('Unable to load module META-INF descriptor', e)
-          } finally {
-            inStream?.close()
-          }
-        }
-      }  catch (IOException ignored) {}
-      map.each { org.codehaus.groovy.reflection.CachedClass cls, List<MetaMethod> methods ->
-        cls.addNewMopMethods(methods)
-      }
-
-      /**
-       * helper method to obtain a BigDecimal from parameters
-       *
-       * optional second argument is default value and can be a BigDecimal, String,
-       * int, long, float, or double
-       */
-      org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap.metaClass.bigDecimal << {
-        String name, Object defaultValue ->
-        BigDecimal bd = null
-
-        def val = delegate.get(name)
-        if (val) {
-          if (val instanceof BigDecimal)
-            bd = (BigDecimal)val
-          else try {
-            bd = new BigDecimal(val)
-            } catch (e) { }
-          }
-
-        if (null == bd && null != defaultValue) {
-          if (defaultValue instanceof BigDecimal)
-            bd = (BigDecimal)defaultValue
-          else try {
-            bd = new BigDecimal(defaultValue)
-            } catch (e) { }
-          }
-
-        return bd
-      }
-
-
+        NcareolExtensionsUtil.setupGroovyExtensions()
+        NcareolExtensionsUtil.fixParameterMap()
     }
 
     def doWithApplicationContext = { ctx ->
