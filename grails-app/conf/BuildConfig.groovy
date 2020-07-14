@@ -51,7 +51,7 @@ grails.project.dependency.resolution = {
         // https://grails.atlassian.net/browse/GRAILS-10508
         compile 'grails-docs:grails-docs:2.3.11'
 
-        compile 'edu.ucar.eol:groovy-ncareol-extensions:1.5.0'
+        compile 'edu.ucar.eol:groovy-ncareol-extensions:1.6.0'
     }
 
     plugins {
