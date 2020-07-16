@@ -1,5 +1,7 @@
 # grails-ncareol-extensions-plugin
 
+**INACTIVE LEGACY REPOSITORY**
+
 Grails plugin to include and load common Groovy and Grails extensions
 
 Includes additional methods for String and Date via groovy-ncareol-extensions,
@@ -7,6 +9,32 @@ the Grails tag g:logMsg, fixed and extended sortableColumn and paginate tags,
 plus some other Groovy & Grails utility/extension/testing classes.
 Adds ActiveBackgroundService (which uses GPars) to make any service/bean
 method into a background task.
+
+## Versions
+
+Version 1.17.1 (tag: v1.17.1) is hopefully the final version
+of this plugin.  (v1.17.1 is the same code as v1.17.0,
+with only the addition of these notes.)
+
+See also our new similar plugin repository supporting Grails 4+:
+
+ * https://github.com/NCAR/grails-ncar-extensions
+
+## Dependencies
+
+This plugin has a dependency for groovy-ncareol-extensions.
+Most older versions of that repo have been included as tags
+in the new repo (for Grails 4):
+
+ * https://github.com/NCAR/groovy-ncar-extensions
+
+Versions of this repo up to 1.16.0 can use the
+groovy-ncar-extensions tag v1.5.1 (or an older corresponding
+tag). The final version of this repo (1.17.0) depends on
+groovy-ncareol-extensions 1.6.0, which is not available
+in groovy-ncar-extensions. It is archived here in
+`lib/groovy-ncar-extensions-1.6.0.zip`, which should be
+found by the build process.
 
 ## Grails fixes
 
